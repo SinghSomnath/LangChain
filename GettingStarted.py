@@ -1,4 +1,4 @@
-# This script demonstrates how to build a retrieval-augmented question answering (QA) system using LangChain and OpenAI APIs. It performs the following steps:
+# This script demonstrates how to build a retrieval-augmented (RAG) question answering (QA) system using LangChain and OpenAI APIs. It performs the following steps:
 # 1. Loads environment variables for API keys and LangSmith tracking.
 # 2. Initializes a ChatOpenAI LLM (GPT-4o).
 # 3. Loads web content from a specified URL using WebBaseLoader.
