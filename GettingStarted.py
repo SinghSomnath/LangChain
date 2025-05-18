@@ -1,3 +1,27 @@
+# This script demonstrates how to build a retrieval-augmented question answering (QA) system using LangChain and OpenAI APIs. It performs the following steps:
+# 1. Loads environment variables for API keys and LangSmith tracking.
+# 2. Initializes a ChatOpenAI LLM (GPT-4o).
+# 3. Loads web content from a specified URL using WebBaseLoader.
+# 4. Splits the loaded documents into manageable chunks using RecursiveCharacterTextSplitter.
+# 5. Generates embeddings for the document chunks with OpenAIEmbeddings.
+# 6. Stores the embeddings in a FAISS vector database for efficient similarity search.
+# 7. Performs a similarity search in the vector database for a given query.
+# 8. Defines a prompt template for answering questions based on retrieved context.
+# 9. Creates a document chain for generating answers using the LLM and the prompt.
+# 10. Sets up a retriever from the vector database and creates a retrieval chain combining retrieval and answer generation.
+# 11. Invokes the retrieval chain with a sample input question and prints the generated answer and the supporting context.
+# Dependencies:
+# - dotenv
+# - langchain_openai
+# - langchain_community
+# - langchain_text_splitters
+# - langchain.vectorstores
+# - langchain.chains
+# - langchain.prompts
+# - langchain_core.documents
+# - FAISS
+# Intended for use as a demonstration or starting point for building retrieval-augmented generation (RAG) pipelines with LangChain and OpenAI.
+
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
