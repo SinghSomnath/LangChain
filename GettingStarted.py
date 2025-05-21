@@ -33,6 +33,9 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain_core.documents import Document
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
 
 
@@ -46,16 +49,14 @@ os.environ["LANGCHAIN_PROJECT"]=os.getenv("LANGCHAIN_PROJECT")
 
 llm=ChatOpenAI(model="gpt-4o")
 # print(llm)
-
+# Loading the documents from the URL and splitting them into chunks
 loader = WebBaseLoader("https://docs.smith.langchain.com/administration/tutorials/manage_spend");
 docs = loader.load();
-# print(docs)
-
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 documents = text_splitter.split_documents(docs)
 
+#Storing the documents in a vector store
 embeddings = OpenAIEmbeddings()
-
 vectorstoredb = FAISS.from_documents(documents, embeddings)
 
 query="LangSmith has two usage limits: total traces and extended"
@@ -83,12 +84,37 @@ document_chain = create_stuff_documents_chain(llm, prompt=prompt)
 
 # print(p)
 
+#Retriever uses the power of vector-DB + llm 
+# where as  document_chain which uses only document chunks along with the LLM  which is time consuming and also expensive for large documents .
+
 retriever = vectorstoredb.as_retriever()
 retrieval_chain = create_retrieval_chain(retriever,document_chain)
 response = retrieval_chain.invoke({"input" : "LangSmith has two usage limits: total traces and extended"})
-print("ANSWER >>>> ")
-print(response['answer'])
+# print("ANSWER >>>> ")
+# print(response['answer'])
 
-print("RESPONSE >>>> ")
-print((response['context']))
-# # print("RESPONSE >>>> ", "\n\n".join([doc.page_content for doc in response['context']]))
+# print("RESPONSE >>>> ")
+# print((response['context']))
+
+
+# the below code demonstrates the use of LCEL
+#SystemMessage - definiing how the LLM should behave
+# HumanMessage - the input from the user
+# AIMessage - the output from the LLM
+
+generic_template = "Translate the following text to {language}: "
+chatPrompt_Template = ChatPromptTemplate.from_messages(
+    [("system", generic_template), ("user", "{text}")]
+)
+
+
+parser = StrOutputParser()
+
+#LCEL - LangChain Embedding Language below
+chain = chatPrompt_Template | llm | parser
+print(chain.invoke({
+    "language": "French",
+    "text": "I love programming in Python. It is a great language for data science."
+}))
+
+
