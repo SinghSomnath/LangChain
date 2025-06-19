@@ -5,3 +5,10 @@ langchain-openai
 beautifulsoup4
 langchain_community
 faiss-cpu
+langchain_core
+langchain-groq
+streamlit
+langchain_chroma
+langchain-huggingface
+langchain_text_splitters
+pypdf
