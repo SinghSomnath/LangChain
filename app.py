@@ -106,6 +106,7 @@ MessagesPlaceholder("chat_history"),
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
     def get_session_history(session_id: str) -> BaseChatMessageHistory:
+        print("Som... The value of session_id is:", session_id)
         if session_id not in st.session_state.store:
             st.session_state.store[session_id] = ChatMessageHistory()
         return st.session_state.store[session_id]
