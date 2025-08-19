@@ -12,3 +12,15 @@ langchain_chroma
 langchain-huggingface
 langchain_text_splitters
 pypdf
+fastapi
+uvicorn
+python-dotenv
+requests
+pydantic
+python-multipart
+typing
+dotenv
+asyncio
+arxiv
+wikipedia
+duckduckgo-search
