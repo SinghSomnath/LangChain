@@ -18,3 +18,18 @@ The script then wraps this logic in a retrieval chain, which first retrieves rel
 
 6> Finally, the script invokes the retrieval chain with a sample query about LangSmith's usage limits, prints the generated answer, and displays the context used for answering. 
 This approach ensures that the LLM's responses are grounded in the retrieved documentation, making the answers more accurate and trustworthy.
+
+required commands :
+
+>pip install -r requirements.txt 
+
+ [The command pip install -r requirements.txt is used to install all the Python packages listed in the requirements.txt file. This file typically contains a list of dependencies required for your project, with each line specifying a package name and, optionally, a version number. By running this command in your terminal, pip (the Python package installer) reads the file and installs each package, ensuring your development environment matches the project's requirements. This approach helps maintain consistency across different setups and makes it easier for others to set up the project on their own machines.]
+
+
+ >streamlit run .\app_tools_agents.py
+
+
+[The command `streamlit run .\app_tools_agents.py` is used to launch a Streamlit application by running the Python script named app_tools_agents.py. Streamlit is an open-source framework that allows you to quickly build and share interactive web apps for data science and machine learning projects using Python. When you execute this command in your terminal, Streamlit starts a local web server and opens your app in a new browser tab. This makes it easy to visualize data, interact with models, and create user-friendly interfaces without needing to write traditional front-end code. The LangChain before the script name specifies that the file is located in the current directory.]
+
+
+
